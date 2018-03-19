@@ -34,16 +34,9 @@
 
 <script>
 export default {
-  data () {
-    return {
-      meetups: [
-        { imageUrl: 'https://i.kinja-img.com/gawker-media/image/upload/s--z9FtuPyJ--/c_scale,fl_progressive,q_80,w_800/mjtzdwibbf0tvkuj4a77.jpg',
-          id: '312321',
-          title: 'Meetup in Arkham' },
-        { imageUrl: 'https://vignette.wikia.nocookie.net/l5r/images/d/d1/Cultists_of_Ruhmal.jpg',
-          id: '312343',
-          title: 'Meetup in Ruhmal' }
-      ]
+  computed: {
+    meetups () {
+      return this.$store.getters.featuredMeetups
     }
   },
   methods: {
