@@ -9,11 +9,15 @@ export const store = new Vuex.Store({
       { imageUrl: 'https://i.kinja-img.com/gawker-media/image/upload/s--z9FtuPyJ--/c_scale,fl_progressive,q_80,w_800/mjtzdwibbf0tvkuj4a77.jpg',
         id: '312321',
         title: 'Meetup in Arkham',
-        date: '2019-07-15' },
+        date: new Date(),
+        location: 'Arkham',
+        description: 'Sinless description..' },
       { imageUrl: 'https://vignette.wikia.nocookie.net/l5r/images/d/d1/Cultists_of_Ruhmal.jpg',
         id: '312343',
         title: 'Meetup in Ruhmal',
-        date: '2019-07-10' }
+        date: new Date(),
+        location: 'Ruhmal',
+        description: 'Sinless description..' }
     ],
     user: {
       id: 321312,
