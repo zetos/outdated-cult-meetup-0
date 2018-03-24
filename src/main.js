@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import * as firebase from 'firebase'
 import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
@@ -25,5 +26,14 @@ new Vue({
   el: '#app',
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+  created () {
+    firebase.initializeApp({
+      apiKey: 'AIzaSyB98wEos_bjesmROHr2t740sJ_eLj_Fj-4',
+      authDomain: 'cultist-meetup.firebaseapp.com',
+      databaseURL: 'https://cultist-meetup.firebaseio.com',
+      projectId: 'cultist-meetup',
+      storageBucket: 'cultist-meetup.appspot.com'
+    })
+  }
 })
