@@ -1,11 +1,23 @@
 <template>
   <v-container>
-      <v-layout row wrap>
+      <v-layout row wrap v-if="loading">
+      <v-flex xs12 class="text-xs-center">
+        <v-progress-circular 
+          indeterminate 
+          :width="7" 
+          :size="70"
+          ></v-progress-circular>
+      </v-flex>
+    </v-layout>
+      <v-layout row wrap v-else>
           <v-flex xs12>
               <v-card>
                   <v-card-title>
                       <div>
-                        <h2 class="primary--text">{{ meetup.title }}</h2>
+                        <h2 class="align-itens primary--text">{{ meetup.title }}</h2>
+                        <template v-if="userIsCreator">
+                            <app-edit-meetup-details-dialog :meetup="meetup"></app-edit-meetup-details-dialog>
+                        </template>
                     </div>
                   </v-card-title>
                   <v-card-media
@@ -31,7 +43,25 @@ export default {
   computed: {
     meetup () {
       return this.$store.getters.loadedMeetup(this.id)
+    },
+    userIsAuthenticated () {
+      return this.$store.getters.user != null
+    },
+    userIsCreator () {
+      if (!this.userIsAuthenticated) {
+        return false
+      }
+      return this.$store.getters.user.id === this.meetup.creatorId
+    },
+    loading () {
+      return this.$store.getters.loading
     }
   }
 }
 </script>
+
+<style scoped>
+    .align-itens {
+        display: inline;
+    }
+</style>
