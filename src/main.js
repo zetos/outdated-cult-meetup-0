@@ -8,6 +8,7 @@ import colors from 'vuetify/es5/util/colors'
 import { store } from './store'
 import DateFilter from './filters/date'
 import Alert from './components/Shared/Alert.vue'
+import EditMeetupDetailsDialog from './components/Meetup/Edit/EditMeetupDetailsDialog.vue'
 
 Vue.use(Vuetify, { theme: {
   primary: colors.red.darken4,
@@ -22,6 +23,7 @@ Vue.use(Vuetify, { theme: {
 Vue.config.productionTip = false
 Vue.filter('date', DateFilter)
 Vue.component('app-alert', Alert)
+Vue.component('app-edit-meetup-details-dialog', EditMeetupDetailsDialog)
 
 /* eslint-disable no-new */
 new Vue({
@@ -30,12 +32,18 @@ new Vue({
   store,
   render: h => h(App),
   created () {
-    firebase.initializeApp({
+    firebase.initializeApp({ // Change credentials after tests..
       apiKey: 'AIzaSyB98wEos_bjesmROHr2t740sJ_eLj_Fj-4',
       authDomain: 'cultist-meetup.firebaseapp.com',
       databaseURL: 'https://cultist-meetup.firebaseio.com',
       projectId: 'cultist-meetup',
       storageBucket: 'cultist-meetup.appspot.com'
     })
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.$store.dispatch('autoSignIn', user)
+      }
+    })
+    this.$store.dispatch('loadMeetups')
   }
 })
