@@ -25,11 +25,19 @@
                 height="400px"></v-card-media>
                 <v-card-text>
                     <div class="info--text">{{ meetup.date | date }} - {{ meetup.location }}</div>
+                    <div>
+                      <app-edit-meetup-date-dialog
+                      :meetup="meetup" v-if="userIsCreator"></app-edit-meetup-date-dialog>
+                      <app-edit-meetup-time-dialog
+                      :meetup="meetup" v-if="userIsCreator"></app-edit-meetup-time-dialog>
+                    </div>
                     <div>{{ meetup.description }}</div>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn class="primary">Register</v-btn>
+                    <app-meetup-register-dialog 
+                      :meetupId="meetup.id"
+                      v-if="userIsAuthenticated && !userIsCreator"></app-meetup-register-dialog>
                 </v-card-actions>
               </v-card>
           </v-flex>

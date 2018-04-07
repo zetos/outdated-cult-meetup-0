@@ -9,6 +9,9 @@ import { store } from './store'
 import DateFilter from './filters/date'
 import Alert from './components/Shared/Alert.vue'
 import EditMeetupDetailsDialog from './components/Meetup/Edit/EditMeetupDetailsDialog.vue'
+import EditMeetupDateDialog from './components/Meetup/Edit/EditMeetupDateDialog.vue'
+import EditMeetupTimeDialog from './components/Meetup/Edit/EditMeetupTimeDialog.vue'
+import RegisterDialog from './components/Meetup/Registration/RegisterDialog.vue'
 
 Vue.use(Vuetify, { theme: {
   primary: colors.red.darken4,
@@ -24,6 +27,9 @@ Vue.config.productionTip = false
 Vue.filter('date', DateFilter)
 Vue.component('app-alert', Alert)
 Vue.component('app-edit-meetup-details-dialog', EditMeetupDetailsDialog)
+Vue.component('app-edit-meetup-date-dialog', EditMeetupDateDialog)
+Vue.component('app-edit-meetup-time-dialog', EditMeetupTimeDialog)
+Vue.component('app-meetup-register-dialog', RegisterDialog)
 
 /* eslint-disable no-new */
 new Vue({
@@ -32,16 +38,17 @@ new Vue({
   store,
   render: h => h(App),
   created () {
-    firebase.initializeApp({ // Change credentials after tests..
-      apiKey: 'AIzaSyB98wEos_bjesmROHr2t740sJ_eLj_Fj-4',
-      authDomain: 'cultist-meetup.firebaseapp.com',
-      databaseURL: 'https://cultist-meetup.firebaseio.com',
-      projectId: 'cultist-meetup',
-      storageBucket: 'cultist-meetup.appspot.com'
+    firebase.initializeApp({
+      apiKey: 'your-fb-credential',
+      authDomain: 'your-fb-credential',
+      databaseURL: 'your-fb-credential',
+      projectId: 'your-fb-credential',
+      storageBucket: 'your-fb-credential'
     })
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.$store.dispatch('autoSignIn', user)
+        this.$store.dispatch('fetchUserData')
       }
     })
     this.$store.dispatch('loadMeetups')
