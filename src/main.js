@@ -38,12 +38,12 @@ new Vue({
   store,
   render: h => h(App),
   created () {
-    firebase.initializeApp({ // Change credentials after tests..
-      apiKey: 'AIzaSyB98wEos_bjesmROHr2t740sJ_eLj_Fj-4',
-      authDomain: 'cultist-meetup.firebaseapp.com',
-      databaseURL: 'https://cultist-meetup.firebaseio.com',
-      projectId: 'cultist-meetup',
-      storageBucket: 'cultist-meetup.appspot.com'
+    firebase.initializeApp({
+      apiKey: 'your-fb-credential',
+      authDomain: 'your-fb-credential',
+      databaseURL: 'your-fb-credential',
+      projectId: 'your-fb-credential',
+      storageBucket: 'your-fb-credential'
     })
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
