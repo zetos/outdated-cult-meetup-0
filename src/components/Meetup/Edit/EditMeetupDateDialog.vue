@@ -1,5 +1,5 @@
 <template>
-  <v-dialog width="350px" persistent v-model=editDialog>
+  <v-dialog width="350px" persistent v-model="editDialog">
       <v-btn small slot="activator">
           Edit Date
       </v-btn>
